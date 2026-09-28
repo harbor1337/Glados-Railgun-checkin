@@ -182,7 +182,7 @@ class API:
         self.domain: str = domain
         self.cookie_index: int = cookie_index
         self.verbose: bool = verbose
-        self.headers: Dict[str, str] = self._get_headers()
+        self.headers: Dict[str, str] = self.()
         self.session = requests.Session()
         self.session.headers.update(self.headers)
 
@@ -211,7 +211,13 @@ class API:
         """获取请求头"""
         return {
             "origin": f"https://{self.domain}",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+            "referer": f"https://{self.domain}/console/checkin",
+            "user-agent": os.environ.get(
+                "GLADOS_USER_AGENT",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",                
+            ),
         }
 
     def _log(self, level: str, emoji: str, message: str, force: bool = False) -> None:
