@@ -106,7 +106,7 @@ class Config:
     DEFAULT_VERBOSE = False
 
     """默认域名"""
-    DOMAINS = ["glados.cloud", "railgun.info"]
+    DOMAINS = ["glados.cloud"]
 
     """兑换计划列表"""
     EXCHANGE_PLANS = {
@@ -182,7 +182,7 @@ class API:
         self.domain: str = domain
         self.cookie_index: int = cookie_index
         self.verbose: bool = verbose
-        self.headers: Dict[str, str] = self.()
+        self.headers: Dict[str, str] = self._get_headers()
         self.session = requests.Session()
         self.session.headers.update(self.headers)
 
